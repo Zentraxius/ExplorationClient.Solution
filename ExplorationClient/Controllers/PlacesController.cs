@@ -15,12 +15,19 @@ namespace ExplorationClient.Controllers
       var allPlaces = Place.GetPlaces();
       return View(allPlaces);
     }
+
+    public ActionResult Create()
+    {
+      return View();
+    }
+
     [HttpPost]
-    public IActionResult Index(Place place)
+    public IActionResult Create(Place place)
     {
       Place.Post(place);
       return RedirectToAction("Index");
     }
+
     public IActionResult Details(int id)
     {
       var thisPlace = Place.GetDetails(id);
@@ -31,13 +38,15 @@ namespace ExplorationClient.Controllers
       var place = Place.GetDetails(id);
       return View(place);
     }
+
     [HttpPost]
-    public IActionResult Edit(int id, Place place)
+    public IActionResult Details(int id, Place place)
     {
       place.PlaceId = id;
       Place.Put(place);
       return RedirectToAction("Details", id);
     }
+
     public IActionResult Delete(int id)
     {
       Place.Delete(id);
